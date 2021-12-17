@@ -4,22 +4,25 @@ import { useEffect, useState } from "react";
 function App() {
   const [tags, setTags] = useState([]);
   const [name, setName] = useState("");
+  const [apiUrl, setApiURL] = useState("");
+
   useEffect(() => {
     getTags();
-    console.log(process.env.REACT_APP_API_URL);
+    setApiURL((apiUrl = process.env.REACT_APP_API_URL));
+    console.log(apiUrl);
   }, []);
 
   function handleName(event) {
     setName(event.target.value);
   }
   function getTags() {
-    axios.get(process.env.REACT_APP_API_URL + "/tag").then((res) => {
+    axios.get(apiUrl + "/tag").then((res) => {
       setTags(res.data);
     });
   }
   function delTag(id) {
     console.log("tag " + id + "supprimé");
-    axios.delete(process.env.REACT_APP_API_URL + "/tag/" + id).then((res) => {
+    axios.delete(apiUrl + "/tag/" + id).then((res) => {
       console.log(res);
       getTags();
     });
@@ -33,7 +36,7 @@ function App() {
       name: name,
     };
     console.log(newTag);
-    axios.post(process.env.REACT_APP_API_URL + "/tag/", newTag).then((res) => {
+    axios.post(apiUrl + "/tag/", newTag).then((res) => {
       console.log(res);
       getTags();
     });
