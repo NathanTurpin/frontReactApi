@@ -6,19 +6,20 @@ function App() {
   const [name, setName] = useState("");
   useEffect(() => {
     getTags();
+    console.log(process.env.REACT_APP_API_URL);
   }, []);
 
   function handleName(event) {
     setName(event.target.value);
   }
   function getTags() {
-    axios.get("http://localhost:5000/tag").then((res) => {
+    axios.get(process.env.REACT_APP_API_URL + "/tag").then((res) => {
       setTags(res.data);
     });
   }
   function delTag(id) {
     console.log("tag " + id + "supprimé");
-    axios.delete("http://localhost:5000/tag/" + id).then((res) => {
+    axios.delete(process.env.REACT_APP_API_URL + "/tag/" + id).then((res) => {
       console.log(res);
       getTags();
     });
@@ -32,7 +33,7 @@ function App() {
       name: name,
     };
     console.log(newTag);
-    axios.post("http://localhost:5000/tag/", newTag).then((res) => {
+    axios.post(process.env.REACT_APP_API_URL + "/tag/", newTag).then((res) => {
       console.log(res);
       getTags();
     });
