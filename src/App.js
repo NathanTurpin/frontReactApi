@@ -46,7 +46,7 @@ function App() {
         <input type="text" value={name} onChange={handleName} />
         <button type="submit">ok</button>
       </form>
-      <h1> Liste des tags</h1>
+      <h1> Liste des tags xx</h1>
 
       <ul>
         {tags.map((tag) => (
